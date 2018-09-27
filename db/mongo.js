@@ -62,7 +62,7 @@ module.exports.insertOne = async function(element) {
   const mongo = await connect();
   const collection = mongo.collection('urls');
   return new Promise((resolve, reject) => {
-    collection.insertOne(element, (err, result) => {
+    collection.insertOne(element, (err, result) => {      
       if (err) {
         return reject(err);
       }

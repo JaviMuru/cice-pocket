@@ -3,12 +3,10 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const MongoClient = require("mongodb").MongoClient;
 
 const websitesRouter = require("./routes/websites");
 const PORT = process.env.PORT || 3001;
-const DB_NAME = process.env.DB_NAME || "cicewebsites";
-const DB_URL = `mongodb://${process.env.DB_URL || "localhost:27018"}`;
+const errorsController = require('./controllers/errors.controller');
 
 const app = express();
 
@@ -24,19 +22,13 @@ app.use(express.static(path.join(__dirname, "public")));
 // Seteo el router de websites
 app.use("/website", websitesRouter.router);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => next(createError(404)));
+// catch 404
+app.use(errorsController.notFound);
 
 // error handler
-app.use((err, req, res, next)  =>{
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.send("Error");
-});
+app.use(errorsController.default);
 
 app.listen(PORT);
+
 
 module.exports = app;
