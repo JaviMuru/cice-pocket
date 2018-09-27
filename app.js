@@ -4,7 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-const websitesRouter = require("./routes/websites");
+const websitesRouter = require("./routes/websites.router");
 const PORT = process.env.PORT || 3001;
 const errorsController = require('./controllers/errors.controller');
 
@@ -29,6 +29,5 @@ app.use(errorsController.notFound);
 app.use(errorsController.default);
 
 app.listen(PORT);
-
 
 module.exports = app;
