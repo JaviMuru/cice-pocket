@@ -5,6 +5,6 @@ module.exports.getUrls = function() {
 }
 
 module.exports.createUrl = function(name, url) {
-  const element = [{"name": name, "url": url}];  
-  return mongo.insert(element);
+  const element = {"name": name, "url": url};  
+  return mongo.insertOne(element);
 }
