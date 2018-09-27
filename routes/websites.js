@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
+const websitesController = require('../controllers/websites.controller')
 let dbClient = null;
 
-router.get("/list", (req, res) => {});
+router.get("/list", websitesController.getListUrls);
 
-router.post("/create", (req, res) => {});
+router.post("/create", websitesController.createUrl);
 
-module.exports = {
-  router,
-  setMongoClient: client => (dbClient = client.collection("sites"))
-};
+module.exports = {router};
