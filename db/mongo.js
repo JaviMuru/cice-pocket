@@ -36,17 +36,16 @@ module.exports.findById = async function(id) {
   const mongo = await connect();
   const collection = mongo.collection('urls');
   return new Promise((resolve, reject) => {
-    collection.find({"_id": ObjectId(id)}).toArray((err, docs) => {
+    collection.find({"_id": ObjectId(id)}).toArray((err, element) => {
       if (err) {
         return reject (err);
-      } 
-
-      if (!docs) {
+      }       
+      if (!element || element.length <= 0) {
           let err = new Error('Not Found');
           err.status = 404;
           return reject(err);
       }
-      return resolve(docs[0]);
+      return resolve(element[0]);
     });
   });
 }
