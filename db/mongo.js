@@ -27,34 +27,8 @@ module.exports.selectAll = async function() {
           return reject(err);
       }
       
-      // console.log("Found the following records");
       return resolve(docs);
-      // callback(docs);
     });
-    // mongoClient.connect(DB_URL, { useNewUrlParser: true }, function(err, db) {
-    //   if (err) {
-    //     reject(err);
-    //   }
-    //   var dbo = db.db(DB_NAME);
-    //   dbo.collection("customers").findOne({}, function(err, result) {
-    //     if (err) throw err;
-    //     console.log(result.name);
-    //     db.close();
-    //   });
-    // });
-    // mongo.find({}).toArray(function(err, results) {
-    //   if (err) {
-    //     return reject(err);
-    //   }
-
-    //   if (!results) {
-    //     let err = new Error('Not Found');
-    //     err.status = 404;
-    //     return reject(err);
-    //   }
-
-    //   resolve(results, fields);
-    // });
   });
 }
 
