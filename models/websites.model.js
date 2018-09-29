@@ -12,3 +12,7 @@ module.exports.createUrl = function(name, url) {
   const element = {"name": name, "url": url};  
   return mongo.insertOne(element);
 }
+
+module.exports.deleteUrl = function(id) {
+  return mongo.deleteById(id);
+}

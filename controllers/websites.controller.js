@@ -35,3 +35,11 @@ module.exports.createUrl = function(req, res, next) {
   .then(result => res.json(result))
   .catch(reason => next(reason));
 }
+
+module.exports.deleteUrl = function(req, res, next) {
+  const id = req.params.id;
+  websiteModel.deleteUrl(id)
+  .then(result => res.json(result))
+  .catch(reason => next(reason));
+}
+

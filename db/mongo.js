@@ -22,11 +22,10 @@ module.exports.selectAll = async function() {
       }
 
       if (!docs) {
-          let err = new Error('Not Found');
-          err.status = 404;
-          return reject(err);
+        let err = new Error('Not Found');
+        err.status = 404;
+        return reject(err);
       }
-      
       return resolve(docs);
     });
   });
@@ -41,9 +40,9 @@ module.exports.findById = async function(id) {
         return reject (err);
       }       
       if (!element || element.length <= 0) {
-          let err = new Error('Not Found');
-          err.status = 404;
-          return reject(err);
+        let err = new Error('Not Found');
+        err.status = 404;
+        return reject(err);
       }
       return resolve(element[0]);
     });
@@ -59,6 +58,19 @@ module.exports.insertOne = async function(element) {
         return reject(err);
       }
       return resolve(result)
+    });
+  });
+}
+
+module.exports.deleteById = async function(id) {
+  const mongo = await connect();
+  const collection = mongo.collection('urls');
+  return new Promise((resolve, reject) => {
+    collection.remove({"_id": ObjectId(id)}, (err, element) => {
+      if (err) {
+        return reject (err);
+      }       
+      return resolve(element);
     });
   });
 }
