@@ -14,12 +14,14 @@ module.exports.createUrl = function(req, res, next) {
     const err = new Error('Bad Request: undefined name');
     err.status = 400;
     next(err);
+    return;
   }
 
   if (url === undefined) {   
     const err = new Error('Bad Request: undefined URL');
     err.status = 400;
     next(err);
+    return;
   }
 
   websiteModel.createUrl(name, url)

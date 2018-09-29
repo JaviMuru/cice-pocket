@@ -15,7 +15,6 @@ module.exports.selectAll = async function() {
   const mongo = await connect();
   const collection = mongo.collection('urls');
   return new Promise((resolve, reject) => {
-    // const collection = db.collection('documents');
     collection.find().toArray((err, docs) => {
       if (err) {
         return reject (err);
