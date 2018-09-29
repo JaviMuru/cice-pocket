@@ -6,6 +6,13 @@ module.exports.getListUrls = function(req, res, next) {
   .catch(reason => next(reason));
 }
 
+module.exports.getUrl = function(req, res, next) {
+  const id = req.params.id;
+  websiteModel.getUrl(id)
+  .then(result => res.json(result))
+  .catch(reason => next(reason));
+}
+
 module.exports.createUrl = function(req, res, next) {
   const name = req.body.name;
   const url = req.body.url;

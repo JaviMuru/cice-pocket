@@ -1,4 +1,5 @@
 const mongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
 const DB_NAME = process.env.DB_NAME || "cicewebsites";
 const DB_URL = `mongodb://${process.env.DB_URL || "localhost:27017"}`;
 
@@ -27,6 +28,25 @@ module.exports.selectAll = async function() {
       }
       
       return resolve(docs);
+    });
+  });
+}
+
+module.exports.findById = async function(id) {
+  const mongo = await connect();
+  const collection = mongo.collection('urls');
+  return new Promise((resolve, reject) => {
+    collection.find({"_id": ObjectId(id)}).toArray((err, docs) => {
+      if (err) {
+        return reject (err);
+      } 
+
+      if (!docs) {
+          let err = new Error('Not Found');
+          err.status = 404;
+          return reject(err);
+      }
+      return resolve(docs[0]);
     });
   });
 }
